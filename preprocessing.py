@@ -75,22 +75,25 @@ def get_landmark(
         "left_foot_index",
         "right_foot_index",
     ]
-    landmark_i = landmarks.landmark[landmark_names.index(name)]
-    return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
+    try:
+        landmark_i = landmarks.landmark[landmark_names.index(name)]
+        return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
+    except:
+        return [None, None, None]
 
 
 def normalize_body(landmarks: mp.framework.formats.landmark_pb2.NormalizedLandmarkList):
     """Orient the body in the same way, and normalize distances."""
     # Scale
     ## calculate torso size
-    shoulder_center = (
-        get_landmark("left_shoulder", landmarks)
-        - get_landmark("right_shoulder", landmarks)
-    ) / 2.0
-    hip_center = (
-        get_landmark("left_hip", landmarks) - get_landmark("right_hip", landmarks)
-    ) / 2.0
-    torso_length = np.linalg.norm(shoulder_center - hip_center)
+    # shoulder_center = (
+    #     get_landmark("left_shoulder", landmarks)
+    #     - get_landmark("right_shoulder", landmarks)
+    # ) / 2.0
+    # hip_center = (
+    #     get_landmark("left_hip", landmarks) - get_landmark("right_hip", landmarks)
+    # ) / 2.0
+    # torso_length = np.linalg.norm(shoulder_center - hip_center)
 
     # position
 
@@ -147,6 +150,10 @@ def extract_data(data_dir: str, filetype: str = "png") -> pd.DataFrame:
     data = []
     data_dir = Path(data_dir)
     for img_file in data_dir.rglob("*." + filetype):
+        # skip checkpint
+        if "ipynb_checkpoints" in str(img_file):
+            continue
+
         result = {}
         try:
             #         split by "-", remerge english splits
