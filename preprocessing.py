@@ -57,17 +57,26 @@ def extract_data(data_dir: Path, filetype: str = "png") -> pd.DataFrame:
         pd.DataFrame: Pandas DataFrame with row for each image.
     """
     data = []
+    data_dir = Path(data_dir)
     for img_file in data_dir.rglob("*." + filetype):
         result = {}
         try:
-            name_sa, name_en = img_file.parent.name.split(" - ")
+            #         split by "-", remerge english splits
+            names = img_file.parent.name.split("-")
+            if len(names) > 1:
+                name_sa = names[0].strip()
+                name_en = "-".join(names[1:])
+            else:
+                name_sa = ""
+                name_en = img_file.parent.name.strip()
         except:
             continue
+
         result["path"] = img_file.relative_to(data_dir)
-        result["name_en"] = name_en.strip()
-        result["name_sa"] = name_sa.strip()
-        #     features = extract_features(normalize_body(load_image(str(d.resolve()))))
-        #     result.update(features)
+        result["name_en"] = name_en
+        result["name_sa"] = name_sa
+        # features = extract_features(normalize_body(load_image(str(d.resolve()))))
+        # result.update(features)
         data.append(result)
     return pd.DataFrame(data)
 
