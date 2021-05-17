@@ -7,23 +7,26 @@ import pandas as pd
 
 # %% Define helper functions
 
-body_angles = [["nose","center_shoulders","center_hips"],
-              ["left_hip","left_shoulder","left_elbow"],
-              ["right_hip","right_shoulder","right_elbow"],
-              ["left_shoulder","left_elbow","left_wrist"],
-              ["right_shoulder","right_elbow","right_wrist"],
-              ["left_shoulder","center_shoulders","nose"],
-              ["right_shoulder","center_shoulders","nose"],
-              ["left_index_1","left_wrist","left_elbow"],
-              ["right_index_1","right_wrist","right_elbow"],
-              ["left_shoulder","left_hip","left_knee"],
-              ["right_shoulder","right_hip","right_knee"],
-              ["left_hip","left_knee","left_ankle"],
-              ["right_hip","right_knee","right_ankle"],
-              ["left_knee","left_ankle","left_foot_index"],
-              ["right_knee","right_ankle","right_foot_index"],
-              ["left_elbow","center_shoulders","right_elbow"],
-              ["left_knee","center_hips","right_knee"]]
+body_angles = [
+    ["nose", "center_shoulders", "center_hips"],
+    ["left_hip", "left_shoulder", "left_elbow"],
+    ["right_hip", "right_shoulder", "right_elbow"],
+    ["left_shoulder", "left_elbow", "left_wrist"],
+    ["right_shoulder", "right_elbow", "right_wrist"],
+    ["left_shoulder", "center_shoulders", "nose"],
+    ["right_shoulder", "center_shoulders", "nose"],
+    ["left_index_1", "left_wrist", "left_elbow"],
+    ["right_index_1", "right_wrist", "right_elbow"],
+    ["left_shoulder", "left_hip", "left_knee"],
+    ["right_shoulder", "right_hip", "right_knee"],
+    ["left_hip", "left_knee", "left_ankle"],
+    ["right_hip", "right_knee", "right_ankle"],
+    ["left_knee", "left_ankle", "left_foot_index"],
+    ["right_knee", "right_ankle", "right_foot_index"],
+    ["left_elbow", "center_shoulders", "right_elbow"],
+    ["left_knee", "center_hips", "right_knee"],
+]
+
 
 def load_image(
     img_path: str,
@@ -97,28 +100,32 @@ def get_landmark(
         return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
     except:
         if name == "center_hips":
-            return (get_landmark("left_hip", landmarks) +
-                                  get_landmark("right_hip", landmarks))/2  
-            
+            return (
+                get_landmark("left_hip", landmarks)
+                + get_landmark("right_hip", landmarks)
+            ) / 2
+
         elif name == "center_shoulders":
-            return (get_landmark("left_shoulder", landmarks) +
-                                  get_landmark("right_shoulder", landmarks))/2 
+            return (
+                get_landmark("left_shoulder", landmarks)
+                + get_landmark("right_shoulder", landmarks)
+            ) / 2
         else:
             return [None, None, None]
 
-def angle_3d_calculation(bodypart1,bodypart2,bodypart3,landmarks_image):
-    
-    
+
+def angle_3d_calculation(bodypart1, bodypart2, bodypart3, landmarks_image):
+
     A = get_landmark(bodypart1, landmarks_image)
     B = get_landmark(bodypart2, landmarks_image)
     C = get_landmark(bodypart3, landmarks_image)
 
     v1 = A - B
     v2 = C - B
-        
+
     cosine_angle = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
     angle = np.arccos(cosine_angle)
-        
+
     return np.degrees(angle)
 
 
@@ -127,8 +134,11 @@ def extract_features(normalized_landmarks):
     result = {}
     selected_landmarks = body_angles
     for body_angle in selected_landmarks:
-        angle = angle_3d_calculation(*body_angle,normalized_landmarks)
-        result[body_angle] = angle   
+        angle = angle_3d_calculation(*body_angle, normalized_landmarks)
+        feature_name = "_".join(
+            ["".join([si.capitalize() for si in s.split("_")]) for s in body_angle]
+        )
+        result[feature_name] = angle
     return result
 
 
@@ -166,7 +176,7 @@ def extract_data(data_dir: str, filetype: str = "png") -> pd.DataFrame:
         result["path"] = img_file.relative_to(data_dir)
         result["name_en"] = name_en
         result["name_sa"] = name_sa
-        features = extract_features(normalize_body(load_image(str(img_file.resolve()))))
+        features = extract_features(load_image(str(img_file.resolve())))
         result.update(features)
         data.append(result)
     return pd.DataFrame(data)
