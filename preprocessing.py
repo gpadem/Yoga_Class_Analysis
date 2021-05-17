@@ -7,6 +7,23 @@ import pandas as pd
 
 # %% Define helper functions
 
+body_angles = [["nose","center_shoulders","center_hips"],
+              ["left_hip","left_shoulder","left_elbow"],
+              ["right_hip","right_shoulder","right_elbow"],
+              ["left_shoulder","left_elbow","left_wrist"],
+              ["right_shoulder","right_elbow","right_wrist"],
+              ["left_shoulder","center_shoulders","nose"],
+              ["right_shoulder","center_shoulders","nose"],
+              ["left_index_1","left_wrist","left_elbow"],
+              ["right_index_1","right_wrist","right_elbow"],
+              ["left_shoulder","left_hip","left_knee"],
+              ["right_shoulder","right_hip","right_knee"],
+              ["left_hip","left_knee","left_ankle"],
+              ["right_hip","right_knee","right_ankle"],
+              ["left_knee","left_ankle","left_foot_index"],
+              ["right_knee","right_ankle","right_foot_index"],
+              ["left_elbow","center_shoulders","right_elbow"],
+              ["left_knee","center_hips","right_knee"]]
 
 def load_image(
     img_path: str,
@@ -79,60 +96,39 @@ def get_landmark(
         landmark_i = landmarks.landmark[landmark_names.index(name)]
         return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
     except:
-        return [None, None, None]
+        if name == "center_hips":
+            return (get_landmark("left_hip", landmarks) +
+                                  get_landmark("right_hip", landmarks))/2  
+            
+        elif name == "center_shoulders":
+            return (get_landmark("left_shoulder", landmarks) +
+                                  get_landmark("right_shoulder", landmarks))/2 
+        else:
+            return [None, None, None]
 
+def angle_3d_calculation(bodypart1,bodypart2,bodypart3,landmarks_image):
+    
+    
+    A = get_landmark(bodypart1, landmarks_image)
+    B = get_landmark(bodypart2, landmarks_image)
+    C = get_landmark(bodypart3, landmarks_image)
 
-def normalize_body(landmarks: mp.framework.formats.landmark_pb2.NormalizedLandmarkList):
-    """Orient the body in the same way, and normalize distances."""
-    # Scale
-    ## calculate torso size
-    # shoulder_center = (
-    #     get_landmark("left_shoulder", landmarks)
-    #     - get_landmark("right_shoulder", landmarks)
-    # ) / 2.0
-    # hip_center = (
-    #     get_landmark("left_hip", landmarks) - get_landmark("right_hip", landmarks)
-    # ) / 2.0
-    # torso_length = np.linalg.norm(shoulder_center - hip_center)
-
-    # position
-
-    return landmarks
+    v1 = A - B
+    v2 = C - B
+        
+    cosine_angle = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+    angle = np.arccos(cosine_angle)
+        
+    return np.degrees(angle)
 
 
 def extract_features(normalized_landmarks):
     """Extract the features we want."""
     result = {}
-    selected_landmarks = [
-        "nose",
-        "left_shoulder",
-        "right_shoulder",
-        "left_elbow",
-        "right_elbow",
-        "left_wrist",
-        "right_wrist",
-        # "left_pinky_1",
-        # "right_pinky_1",
-        "left_index_1",
-        "right_index_1",
-        "left_thumb_2",
-        "right_thumb_2",
-        "left_hip",
-        "right_hip",
-        "left_knee",
-        "right_knee",
-        "left_ankle",
-        "right_ankle",
-        # "left_heel",
-        # "right_heel",
-        "left_foot_index",
-        "right_foot_index",
-    ]
-    for lm_name in selected_landmarks:
-        lm = get_landmark(lm_name, normalized_landmarks)
-        result[f"{lm_name}_x"] = lm[0]
-        result[f"{lm_name}_y"] = lm[1]
-        result[f"{lm_name}_z"] = lm[2]
+    selected_landmarks = body_angles
+    for body_angle in selected_landmarks:
+        angle = angle_3d_calculation(*body_angle,normalized_landmarks)
+        result[body_angle] = angle   
     return result
 
 
