@@ -31,7 +31,7 @@ body_angles = [
 def load_image(
     img_path: str,
     model_complexity: int = 2,
-    min_detection_confidence: float = 0.5,
+    min_detection_confidence: float = 0.75,
     **kwargs,
 ) -> mp.framework.formats.landmark_pb2.NormalizedLandmarkList:
     """All preprocessing task to load a single frame.
@@ -100,18 +100,18 @@ def get_landmark(
         return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
     except:
         if name == "center_hips":
-            return (
-                get_landmark("left_hip", landmarks)
-                + get_landmark("right_hip", landmarks)
-            ) / 2
+            try:
+                return (get_landmark("left_hip", landmarks) + get_landmark("right_hip", landmarks)) / 2
+            except:
+                return np.array([np.nan,np.nan,np.nan])
 
         elif name == "center_shoulders":
-            return (
-                get_landmark("left_shoulder", landmarks)
-                + get_landmark("right_shoulder", landmarks)
-            ) / 2
+            try:
+                return (get_landmark("left_shoulder", landmarks) + get_landmark("right_shoulder", landmarks)) / 2
+            except:
+                return np.array([np.nan,np.nan,np.nan])
         else:
-            return [None, None, None]
+            return np.array([np.nan,np.nan,np.nan])
 
 
 def angle_3d_calculation(bodypart1, bodypart2, bodypart3, landmarks_image):
