@@ -187,6 +187,9 @@ if __name__ == "__main__":
     if len(argv) < 2:
         print(f"Specify path.")
     else:
-        df = extract_data(argv[1])
+        df = extract_data(argv[1], "jpg")
         df.drop("path", axis=1, inplace=True)
-        df.to_csv("output.csv")
+
+    output_name = argv[2] if len(argv) > 2 else "output.csv"
+
+    df.to_csv(output_name)
