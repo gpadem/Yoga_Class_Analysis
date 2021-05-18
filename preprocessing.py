@@ -1,5 +1,6 @@
 from pathlib import Path
 from sys import argv
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -176,11 +177,12 @@ def extract_data(data_dir: str, filetype: str = "png") -> pd.DataFrame:
 
         result = {}
         try:
-            #         split by "-", remerge english splits
-            names = img_file.parent.name.split("-")
-            if len(names) > 1:
-                name_sa = names[0].strip()
-                name_en = "-".join(names[1:]).strip()
+            if " - " in img_file.parent.name:
+                # split by "-", remerge english splits
+                names = img_file.parent.name.split("-")
+                if len(names) > 1:
+                    name_sa = names[0].strip()
+                    name_en = "-".join(names[1:]).strip()
             else:
                 name_sa = ""
                 name_en = img_file.parent.name.strip()
@@ -206,4 +208,4 @@ if __name__ == "__main__":
 
     output_name = argv[2] if len(argv) > 2 else "output.csv"
 
-    df.to_csv(output_name)
+    df.to_csv(output_name, index=False)
