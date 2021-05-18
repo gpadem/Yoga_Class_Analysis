@@ -30,7 +30,7 @@ body_angles = [
 
 
 def load_image(
-    img_path: str,
+    img,
     model_complexity: int = 2,
     min_detection_confidence: float = 0.75,
     **kwargs,
@@ -41,7 +41,10 @@ def load_image(
         img_path (str): Path of the image.
     """
     # load image
-    image = cv2.imread(img_path)
+    if type(img) in [str, Path]:
+        image = cv2.imread(img)
+    elif type(img) == np.ndarray:
+        image = img
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     # extract pose
@@ -171,7 +174,7 @@ def extract_data(data_dir: str, filetype: str = "png") -> pd.DataFrame:
     data = []
     data_dir = Path(data_dir)
     for img_file in data_dir.rglob("*." + filetype):
-        # skip checkpint
+        # skip checkpoint
         if "ipynb_checkpoints" in str(img_file):
             continue
 
