@@ -32,7 +32,7 @@ def process_video(file, fps=2):
             predicted_pose = model.predict_proba(
                 np.atleast_2d([*pose_features.values()])
             )
-            result = {"time": time, "probabilities": predicted_pose}
+            result = {"time": time}
             for key, val in zip(model.classes_, predicted_pose.flatten()):
                 result[key] = val
             out.append(result)
