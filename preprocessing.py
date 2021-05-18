@@ -60,6 +60,11 @@ def get_landmark(
     name: str, landmarks: mp.framework.formats.landmark_pb2.NormalizedLandmarkList
 ):
     """Get landmark postition from English name."""
+
+    # in case no landmarks were found
+    if not landmarks:
+        return np.array([np.nan, np.nan, np.nan])
+
     landmark_names = [
         "nose",
         "left_eye_inner",
@@ -98,24 +103,33 @@ def get_landmark(
     try:
         landmark_i = landmarks.landmark[landmark_names.index(name)]
         return np.array([landmark_i.x, landmark_i.y, landmark_i.z])
-    except:
+
+    except ValueError:
         if name == "center_hips":
             try:
-                return (get_landmark("left_hip", landmarks) + get_landmark("right_hip", landmarks)) / 2
+                return (
+                    get_landmark("left_hip", landmarks)
+                    + get_landmark("right_hip", landmarks)
+                ) / 2
             except:
-                return np.array([np.nan,np.nan,np.nan])
+                return np.array([np.nan, np.nan, np.nan])
 
         elif name == "center_shoulders":
             try:
-                return (get_landmark("left_shoulder", landmarks) + get_landmark("right_shoulder", landmarks)) / 2
+                return (
+                    get_landmark("left_shoulder", landmarks)
+                    + get_landmark("right_shoulder", landmarks)
+                ) / 2
             except:
-                return np.array([np.nan,np.nan,np.nan])
+                return np.array([np.nan, np.nan, np.nan])
         else:
-            return np.array([np.nan,np.nan,np.nan])
+            return np.array([np.nan, np.nan, np.nan])
 
 
-def angle_3d_calculation(bodypart1, bodypart2, bodypart3, landmarks_image):
-
+def angle_3d_calculation(
+    bodypart1: str, bodypart2: str, bodypart3: str, landmarks_image
+):
+    """Calculate angle between 3 bodyparts, second one is the vertex."""
     A = get_landmark(bodypart1, landmarks_image)
     B = get_landmark(bodypart2, landmarks_image)
     C = get_landmark(bodypart3, landmarks_image)
