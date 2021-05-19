@@ -12,7 +12,7 @@ This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gül
 
 **Deployment strategy:** Github page
 
-**Team challenge:** Group project
+**Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
 ## Mission objectives
 
@@ -38,3 +38,27 @@ The company envisions an MVP where the customers receive a report of the yoga po
 - Pending things to do
 - Acknowledgments
 - Collaboration
+
+## Installation
+
+## Repository
+
+- README.md
+- model.sav
+- model.py
+- preprocessing.py
+- Video_processing.py
+- Data_extraction.ipynb
+- dataset:
+    - full_data.csv
+
+## Result
+
+
+
+## To do
+
+
+
+# THANK YOU FOR READING!
+
