@@ -7,18 +7,50 @@ import cv2
 import pandas as pd
 from preprocessing import extract_features, load_image
 from mediapipe import solutions
+from keras.models import load_model
 
-#  import RandomForest Model
-with open("model.sav", "rb") as f:
-    model_dict = pickle.load(f)
-    model = [*model_dict.values()][0]
+
+class ModelWrapper:
+    def __init__(self, choice="rf"):
+        self.mtype = choice
+        if choice == "rf":
+            with open("model.sav", "rb") as f:
+                model_dict = pickle.load(f)
+                self.model = [*model_dict.values()][0]
+        elif choice == "nn":
+            self.model = load_model("NN_model")
+
+    def predict_proba(self, *args, **kwargs):
+        if self.mtype == "rf":
+            return self.model.predict_proba(*args, **kwargs).flatten()
+        elif self.mtype == "nn":
+            return self.model.predict_proba(*args, **kwargs).flatten()
+
+    def labels(self):
+        if self.mtype == "rf":
+            return self.model.classes_
+        elif self.mtype == "nn":
+            return [
+                "Child's pose",
+                "Cobra Pose",
+                "Downward-facing Dog",
+                "Easy Pose",
+                "Half Splits Pose",
+                "Happy Baby's pose",
+                "Low Lunge",
+                "Standing Forward Bend",
+                "Upward-Facing Dog",
+                "cat pose",
+                "cow pose",
+                "high plank",
+            ]
 
 
 mp_drawing = solutions.drawing_utils
 cv2.waitKey(0)
 
 
-def process_video(file, fps=2, show_video=None, output_file=None):
+def process_video(file, fps=2, model_choice="rf", show_video=None, output_file=None):
     """Process a video file to extract poses.
 
     :param file: path to video file
@@ -26,6 +58,9 @@ def process_video(file, fps=2, show_video=None, output_file=None):
     :param show_video: Show annoted video in window
     :param output_file: If specified save annotated video in file with this name
     """
+    # model selection
+    model = ModelWrapper(model_choice)
+
     # read video
     cap = cv2.VideoCapture(file)
     video_fps = cap.get(cv2.CAP_PROP_FPS)
@@ -70,14 +105,12 @@ def process_video(file, fps=2, show_video=None, output_file=None):
 
                     # save result
                     result = {"time": time}
-                    for key, val in zip(model.classes_, predicted_pose.flatten()):
+                    for key, val in zip(model.labels(), predicted_pose):
                         result[key] = val
                     out.append(result)
 
                     # show best estimation
-                    best_pred = get_best_predicition(
-                        predicted_pose.flatten(), model.classes_
-                    )
+                    best_pred = get_best_predicition(predicted_pose, model.labels())
                     if best_pred:
                         print(
                             ", ".join(
@@ -161,8 +194,9 @@ if __name__ == "__main__":
         str(filename.resolve()),
         show_video=False,
         fps=5,
-        output_file=f"{outname}_annotated.mp4",
+        model_choice="nn",
+        output_file=f"{outname}_nn_annotated.mp4",
     )
 
     # write to csv file
-    video.to_csv(f"video_results-{outname}.csv", index=False)
+    video.to_csv(f"video_results-nn-{outname}.csv", index=False)
