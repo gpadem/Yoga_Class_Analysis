@@ -2,7 +2,6 @@
 import pickle
 import numpy as np
 import cv2
-from numpy.core.fromnumeric import cumprod, cumsum
 import pandas as pd
 from preprocessing import extract_features, load_image
 
@@ -13,6 +12,11 @@ with open("model.sav", "rb") as f:
 
 
 def process_video(file, fps=2, show_video=False):
+    """Process a video file to extract poses.
+
+    :param file: path to video file
+    :param fps: how many frames per second the analysis is done, None for all frames, defult 2
+    """
     cap = cv2.VideoCapture(file)
     video_fps = cap.get(cv2.CAP_PROP_FPS)
     frames_between_predict = int(video_fps / fps) if fps is not None else 1
@@ -54,6 +58,16 @@ def process_video(file, fps=2, show_video=False):
 
 
 def get_best_predicition(proba, labels, thresholt=0.05) -> list:
+    """From a list of predicted pose probabilities, decide the best one(s).
+
+    When the best probabilities are close, more than one result is returned.
+    When the resulting list is too long, or the cumulative probability sum is
+    less than 50%, nothing is returned.
+
+    :param proba: array of probabilities
+    :param labels: array of pose names
+    :param thresholt: thesholt percentage, default 0.05
+    """
     order = np.argsort(proba)[::-1]
     results = [(labels[order[0]], proba[order[0]])]
     cum_proba = proba[order[0]]
