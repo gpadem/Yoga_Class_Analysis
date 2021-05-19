@@ -1,9 +1,12 @@
 #  imports
+from pathlib import Path
 import pickle
+from sys import argv
 import numpy as np
 import cv2
 import pandas as pd
 from preprocessing import extract_features, load_image
+from mediapipe import solutions
 
 #  import RandomForest Model
 with open("model.sav", "rb") as f:
@@ -11,48 +14,108 @@ with open("model.sav", "rb") as f:
     model = [*model_dict.values()][0]
 
 
-def process_video(file, fps=2, show_video=False):
+mp_drawing = solutions.drawing_utils
+cv2.waitKey(0)
+
+
+def process_video(file, fps=2, show_video=None, output_file=None):
     """Process a video file to extract poses.
 
     :param file: path to video file
-    :param fps: how many frames per second the analysis is done, None for all frames, defult 2
+    :param fps: how many frames per second the analysis is done, None for all frames, default 2
+    :param show_video: Show annoted video in window
+    :param output_file: If specified save annotated video in file with this name
     """
+    # read video
     cap = cv2.VideoCapture(file)
     video_fps = cap.get(cv2.CAP_PROP_FPS)
     frames_between_predict = int(video_fps / fps) if fps is not None else 1
+    video_size = int(cap.get(3)), int(cap.get(4))
 
+    # output video file
+    if output_file:
+        fourcc = cv2.VideoWriter_fourcc("m", "p", "4", "v")
+        export_video = cv2.VideoWriter(output_file, fourcc, video_fps, video_size)
+
+    draw_results = output_file or show_video
+
+    # result keeping
     out = []
-
     counter = 0
+    detected_pose = None
+
     while cap.isOpened():
         ret, frame = cap.read()
         counter += 1
         time = counter * 1 / video_fps
-        if counter % frames_between_predict != 0:
-            continue
 
         # get body pose
         if ret:
-            if show_video:
-                cv2.imshow("Yoga pose detection", frame)
-            pose_features = extract_features(load_image(frame))
-            predicted_pose = model.predict_proba(
-                np.atleast_2d([*pose_features.values()])
-            )
-            result = {"time": time}
-            for key, val in zip(model.classes_, predicted_pose.flatten()):
-                result[key] = val
-            out.append(result)
-            best_pred = get_best_predicition(predicted_pose.flatten(), model.classes_)
-            if best_pred:
-                print(
-                    ", ".join(f"{name} ({prob*100:.0f}%)" for name, prob in best_pred)
-                )
+            # frames per second
+            if counter % frames_between_predict == 0:
+                # get pose with mediapipe
+                with solutions.pose.Pose(
+                    static_image_mode=True,
+                    model_complexity=2,
+                    min_detection_confidence=0.5,
+                ) as pose:
+                    # image_height, image_width, _ = image.shape
+                    detected_pose = pose.process(frame)
+
+                # use pretrained model to predict yoga pose
+                pose_features = extract_features(detected_pose.pose_landmarks)
+                ft_np = np.atleast_2d([*pose_features.values()])
+                if not np.isnan(ft_np.sum()):
+                    predicted_pose = model.predict_proba(ft_np)
+
+                    # save result
+                    result = {"time": time}
+                    for key, val in zip(model.classes_, predicted_pose.flatten()):
+                        result[key] = val
+                    out.append(result)
+
+                    # show best estimation
+                    best_pred = get_best_predicition(
+                        predicted_pose.flatten(), model.classes_
+                    )
+                    if best_pred:
+                        print(
+                            ", ".join(
+                                f"{name} ({prob*100:.0f}%)" for name, prob in best_pred
+                            )
+                        )
+
+            # save frame to export video
+            if draw_results:
+                if detected_pose:
+                    mp_drawing.draw_landmarks(frame, detected_pose.pose_landmarks)
+                    if best_pred:
+                        for i, prediction in enumerate(best_pred):
+                            yoga_move = f"{prediction[0]} ({prediction[1]*100:.0f}%)"
+                            cv2.putText(
+                                frame,
+                                yoga_move,
+                                (50, 50 + i * 30),
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                0.75,
+                                (255, 126, 0),
+                                2,
+                                cv2.LINE_AA,
+                            )
+                if show_video:
+                    cv2.imshow("Video", frame)
+                if output_file:
+                    export_video.write(frame)
 
         else:
             break
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
 
     cap.release()
+
+    # closing all open windows
+    cv2.destroyAllWindows()
 
     return pd.DataFrame(out)
 
@@ -68,6 +131,7 @@ def get_best_predicition(proba, labels, thresholt=0.05) -> list:
     :param labels: array of pose names
     :param thresholt: thesholt percentage, default 0.05
     """
+
     order = np.argsort(proba)[::-1]
     results = [(labels[order[0]], proba[order[0]])]
     cum_proba = proba[order[0]]
@@ -77,12 +141,28 @@ def get_best_predicition(proba, labels, thresholt=0.05) -> list:
         results.append((labels[o], proba[o]))
         cum_proba += proba[o]
 
-    if cum_proba > 0.5 and len(results) < 4:
+    if cum_proba > 0.30 and len(results) < 4:
         return results
     else:
         return []
 
 
 if __name__ == "__main__":
-    test = process_video("DATA/training data/training recording/minute.mp4")
-    test.to_csv("test_video_results.csv", index=False)
+    filename = argv[1]
+
+    if filename == "webcam":
+        filename = 0
+        outname = "webcam_annotated.mp4"
+    else:
+        filename = Path(filename)
+        outname = filename.stem
+    print(f"{filename}, {outname}")
+    video = process_video(
+        str(filename.resolve()),
+        show_video=False,
+        fps=5,
+        output_file=f"{outname}_annotated.mp4",
+    )
+
+    # write to csv file
+    video.to_csv(f"video_results-{outname}.csv", index=False)
