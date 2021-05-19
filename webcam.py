@@ -67,6 +67,8 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
                     body_language_class = f"{best_pred[0][0]}"
                     body_language_prob = best_pred[0][1]
 
+                    print(
+                    "\n".join(f"{name} ({prob*100:.0f}%)" for name, prob in best_pred))
                     # Grab ear coords
                     coords = tuple(np.multiply(
                                     np.array(
