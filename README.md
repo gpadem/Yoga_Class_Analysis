@@ -1,6 +1,11 @@
 # Yoga class analysis
+
+In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe]() for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
+
+## Table of contents
+
  ## About this project
-This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's Theano 2.27 promotion.
+This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
 
 **Repository:** Yoga_Class_Analysis
 
@@ -30,31 +35,39 @@ Would you like to travel to NY? The company is asking for an AI developer with t
 
 The company envisions an MVP where the customers receive a report of the yoga poses, which ones were done correctly, and metrics related to time and repetition. 
 
-## Table of Contents
-
-- Installation
-- Repository
-- Visual
-- Pending things to do
-- Acknowledgments
-- Collaboration
-
-
 ## Important files in this repository
+- **Exploration**:
+    - [Data_extraction.ipynb](Data_extraction.ipynb)
+    - [Extra Data.ipynb](./'Extra Data.ipynb')
+    - [NN_classifier.ipynb](NN_classifier.ipynb)
+    - webcam.py
+    - video.py
+- Usage scripts 
+    - preprocessing.py
+    - video_processing.py
+- Training data
+    - full_data.csv
+- Trained models
+    - NN_model (folder)
+    - model.sav
+    - model.py
 
-- Data_extraction.ipynb
-- Extra Data.ipynb
-- preprocessing.py
-- full_data.csv
-- model.py
-- model.sav
-- NN_classifier.ipynb
-- NN_model (folder): 
-- video_processing.py
-- video.py
-- webcam.py
+## Installation & Use
 
-## Installation
+All necessary packages are in [requirements.txt](requirements.txt), best make a virtual environment and install wtih 
+```python 
+pip install -r requirements.txt
+```
+
+To *use* the processing pipeline, you run **video_processing.py**, however this is very basic and not very well-tested.
+
+```
+python video_processing.py VIDEOFILE [rf|nn]
+```
+
+
+The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame.For all options, look in the docstrings of the python files.
+
 
 
 ### Workflow
