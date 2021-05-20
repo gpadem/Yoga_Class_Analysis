@@ -43,20 +43,68 @@ The company envisions an MVP where the customers receive a report of the yoga po
 
 ## Repository
 
-- README.md
-- model.sav
-- model.py
-- preprocessing.py
-- Video_processing.py
 - Data_extraction.ipynb
-- dataset:
-    - full_data.csv
+- Extra Data.ipynb
+- preprocessing.py
+- full_data.csv
+- model.py
+- model.sav
+- NN_classifier.ipynb
+- NN_model (folder):
+    - variables (folder): variables.data-00000-of-00001; variables.index
+    - saved_model.pb
+- video_processing.py
+- video.pywebcam.py
+- webcam.py
+- timeline.png
+- README.md
 
-## Result
+
+### Workflow
+
+### Datascraping and preprocessing
+
+#### Data_extraction.ipynb
+
+In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
+
+#### Extra Data.ipynb
+
+To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
+
+#### preprocessing.py
+
+#### full_data.csv
+
+A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset. 
+
+### Model training
+
+#### model.py
+#### model.sav
+#### NN_classifier.ipynb
+#### NN_model
+
+### Testing the model
+
+#### video_processing.py
+#### video.pywebcam.py
+#### webcam.py
+
+### Extra
+
+#### timeline.png
+#### README.md
+
+## Visual
 
 
 
-## To do
+## Pending things to do
+
+## Acknowlegdements
+
+## Collaboration
 
 
 
