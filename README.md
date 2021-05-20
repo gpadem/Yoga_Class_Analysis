@@ -35,23 +35,7 @@ Would you like to travel to NY? The company is asking for an AI developer with t
 
 The company envisions an MVP where the customers receive a report of the yoga poses, which ones were done correctly, and metrics related to time and repetition. 
 
-## Important files in this repository
-- **Exploration**:
-    - [Data_extraction.ipynb](Data_extraction.ipynb): How 
-    - Extra Data.ipynb: collection of extra training data
-    - [NN_classifier.ipynb](NN_classifier.ipynb)
-    - webcam.py: test with webcam capturing
 
-    - video.py
-- Usage scripts 
-    - preprocessing.py
-    - video_processing.py
-- Training data
-    - full_data.csv
-- Trained models
-    - NN_model (folder)
-    - model.sav
-    - model.py
 
 ## Installation & Use
 
@@ -72,38 +56,53 @@ python webcam_demo.py
 
 ```
 
-The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame.For all options, look in the docstrings of the python files.
+The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame. For all options, look in the docstrings of the python files.
 
 
 
-### Workflow
+## Important files in this repository
+- **Exploration**:
+    - [Data_extraction.ipynb](Data_extraction.ipynb): How 
+    - Extra Data.ipynb: collection of extra training data
+    - [NN_classifier.ipynb](NN_classifier.ipynb)
+    - webcam.py: test with webcam capturing
 
-### Datascraping and preprocessing
-
-#### Data_extraction.ipynb
+    - video.py
+- Usage scripts 
+    - preprocessing.py
+    - video_processing.py
+- Training data
+    - full_data.csv
+- Trained models
+    - NN_model (folder)
+    - model.sav
+    - model.py
+### Data_extraction.ipynb
 In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
-#### Extra Data.ipynb
+### Extra Data.ipynb
 To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
 
-#### preprocessing.py
+### preprocessing.py
 
-#### full_data.csv
+This contains all 
+
+### full_data.csv
 A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset. 
 
-### Model training
+## Model training
 
-#### Machine Learning
-#### model.py
+### Machine Learning
+### model.py
 In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
 
-#### model.sav
+### model.sav
 A file containing the trained machine learning model.
 
-#### Neural Network
-#### NN_classifier.ipynb
+### Neural Network
+### NN_classifier.ipynb
 
-#### NN_model
+### NN_model
 
 ### Testing the model
 
