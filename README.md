@@ -37,10 +37,11 @@ The company envisions an MVP where the customers receive a report of the yoga po
 
 ## Important files in this repository
 - **Exploration**:
-    - [Data_extraction.ipynb](Data_extraction.ipynb)
-    - [Extra Data.ipynb](./'Extra Data.ipynb')
+    - [Data_extraction.ipynb](Data_extraction.ipynb): How 
+    - Extra Data.ipynb: collection of extra training data
     - [NN_classifier.ipynb](NN_classifier.ipynb)
-    - webcam.py
+    - webcam.py: test with webcam capturing
+
     - video.py
 - Usage scripts 
     - preprocessing.py
@@ -65,6 +66,11 @@ To *use* the processing pipeline, you run **video_processing.py**, however this 
 python video_processing.py VIDEOFILE [rf|nn]
 ```
 
+To try with your **webcam**, run 
+```python 
+python webcam_demo.py
+
+```
 
 The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame.For all options, look in the docstrings of the python files.
 
