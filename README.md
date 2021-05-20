@@ -111,8 +111,10 @@ This folder contains the saved Neural Network model and its variables.
 ### Testing the model
 
 #### video_processing.py
-#### video.py
 With this file a video can be analyzed based on the two created models. Displaying the move with the highest probability.
+
+#### video.py
+main file to predict poses from video stream.
 
 #### webcam.py
 With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
