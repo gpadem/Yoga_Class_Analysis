@@ -87,13 +87,12 @@ In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, lef
 To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
 
 ### preprocessing.py
-
-This contains all 
+This contains all functions used to extract datapoints and calculate the body angles from images.
 
 ### full_data.csv
 A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset. 
 
-## Model training
+### Model training
 
 ### Machine Learning
 ### model.py
@@ -104,8 +103,10 @@ A file containing the trained machine learning model.
 
 ### Neural Network
 ### NN_classifier.ipynb
+This notebook contains the training and saving of the Feedforwad Neural Network.
 
 ### NN_model
+This folder contains the saved Neural Network model and its variables.
 
 ### Testing the model
 
