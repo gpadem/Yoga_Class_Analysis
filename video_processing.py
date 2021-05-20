@@ -189,14 +189,17 @@ if __name__ == "__main__":
     else:
         filename = Path(filename)
         outname = filename.stem
-    print(f"{filename}, {outname}")
+
+    model = argv[2] if len(argv) >= 2 else "rf"
+    print(f"{filename}, {outname}, {model}")
+
     video = process_video(
         str(filename.resolve()),
         show_video=False,
         fps=5,
-        model_choice="nn",
-        output_file=f"{outname}_nn_annotated.mp4",
+        model_choice=model,
+        output_file=f"{outname}_{model}_annotated.mp4",
     )
 
     # write to csv file
-    video.to_csv(f"video_results-nn-{outname}.csv", index=False)
+    video.to_csv(f"video_results-{model}-{outname}.csv", index=False)
