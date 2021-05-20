@@ -60,7 +60,7 @@ The main part is the function `process_video()` in _video_processing.py_, which 
 
 ## Workflow
 
-![Image of workflow](https://github.com/gpadem/Yoga_Class_analysis/workflow.png?raw=true)
+![Image of workflow](workflow.png)
 
 ## Important files in this repository
 - **Exploration**:
