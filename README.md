@@ -1,5 +1,5 @@
 # Yoga class analysis
-
+ ## About this project
 This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's Theano 2.27 promotion.
 
 **Repository:** Yoga_Class_Analysis
@@ -14,13 +14,13 @@ This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gül
 
 **Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
-## Mission objectives
+### Mission objectives
 
 - Use of computer vision techniques for tracking poses on images and videos.
 - Exploration of pre-trained models for pose tracking on live and streaming media.
 - Deployment of models for end-customers.
 
-## The Mission
+### The Mission
 
 The client is a wellbeing company based in NY city. They are currently providing yoga sessions online with trainers connected in real-time. This system allows the company to reach more people, facilitates the agenda of the clients, and increases the engagement on the sessions since the coaches are available to help.
 
@@ -39,9 +39,8 @@ The company envisions an MVP where the customers receive a report of the yoga po
 - Acknowledgments
 - Collaboration
 
-## Installation
 
-## Repository
+## Important files in this repository
 
 - Data_extraction.ipynb
 - Extra Data.ipynb
@@ -50,14 +49,12 @@ The company envisions an MVP where the customers receive a report of the yoga po
 - model.py
 - model.sav
 - NN_classifier.ipynb
-- NN_model (folder):
-    - variables (folder): variables.data-00000-of-00001; variables.index
-    - saved_model.pb
+- NN_model (folder): 
 - video_processing.py
-- video.pywebcam.py
+- video.py
 - webcam.py
-- timeline.png
-- README.md
+
+## Installation
 
 
 ### Workflow
