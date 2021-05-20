@@ -58,7 +58,9 @@ python webcam_demo.py
 
 The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame. For all options, look in the docstrings of the python files.
 
+## Workflow
 
+![Image of workflow](https://github.com/gpadem/Yoga_Class_analysis/workflow.png?raw=true)
 
 ## Important files in this repository
 - **Exploration**:
@@ -77,6 +79,7 @@ The main part is the function `process_video()` in _video_processing.py_, which 
     - NN_model (folder)
     - model.sav
     - model.py
+
 ### Data_extraction.ipynb
 In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
