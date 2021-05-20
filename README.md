@@ -125,15 +125,16 @@ This .png file represents the probabilities of all the different yoga moves duri
 #### README.md
 A file to explain the files, approach, etc. of this project.
 
-## Visual
 
 
 
 ## Pending things to do
 
-## Acknowlegdements
-
-## Collaboration
+There is potential for this technology. In only one week time we can get basic results. So given more time and data this project could be optimized by:
+- Involving a yoga expert for better data selection
+- More training data
+- Fine tuning of the models
+- Fine tuning of the MediaPipe library (because it does not always detect the body points accurate)
 
 
 
