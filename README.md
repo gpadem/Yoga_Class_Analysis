@@ -62,36 +62,46 @@ The company envisions an MVP where the customers receive a report of the yoga po
 ### Datascraping and preprocessing
 
 #### Data_extraction.ipynb
-
 In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
 #### Extra Data.ipynb
-
 To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
 
 #### preprocessing.py
 
 #### full_data.csv
-
 A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset. 
 
 ### Model training
 
+#### Machine Learning
 #### model.py
+In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
+
 #### model.sav
+A file containing the trained machine learning model.
+
+#### Neural Network
 #### NN_classifier.ipynb
+
 #### NN_model
 
 ### Testing the model
 
 #### video_processing.py
-#### video.pywebcam.py
+#### video.py
+With this file a video can be analyzed based on the two created models. Displaying the move with the highest probability.
+
 #### webcam.py
+With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
 
 ### Extra
 
 #### timeline.png
+This .png file represents the probabilities of all the different yoga moves during a 1 minute video.
+
 #### README.md
+A file to explain the files, approach, etc. of this project.
 
 ## Visual
 
