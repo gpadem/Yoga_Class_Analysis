@@ -22,11 +22,11 @@ class ModelWrapper:
         """Select which model to load: "rf" for random forest, "nn" for neural network."""
         self.mtype = choice
         if choice == "rf":
-            with open("saved_models/model.sav", "rb") as f:
+            with open(Path("saved_models") / "model.sav", "rb") as f:
                 model_dict = pickle.load(f)
                 self.model = [*model_dict.values()][0]
         elif choice == "nn":
-            self.model = load_model("saved_models/NN_model")
+            self.model = load_model(Path("saved_models") / "NN_model")
 
     def predict_proba(self, *args, **kwargs):
         if self.mtype == "rf":

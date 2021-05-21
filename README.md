@@ -30,7 +30,7 @@ The company envisions an MVP where the customers receive a report of the yoga po
 
 ## Installation & Use
 
-All necessary packages are in [requirements.txt](requirements.txt), best make a virtual environment and install wtih 
+All necessary packages are in [requirements.txt](requirements.txt), it's best best make a virtual environment and install with 
 ```python 
 pip install -r requirements.txt
 ```
@@ -41,17 +41,17 @@ To *use* the processing pipeline, you run **video_processing.py**, however this 
 python video_processing.py VIDEOFILE [rf|nn]
 ```
 
-To try with your **webcam**, run 
-```python 
-python webcam_demo.py
-
-```
-
 The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame. For all options, look in the docstrings of the python files.
 
 ## Workflow
 
 ![Image of workflow](images/workflow.png)
+
+The yoga pose detection is done in two big steps: 
+* **Body pose detection** with MediaPipe;
+* **Pose classification** with machine learning or neural networks.
+
+To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts 
 
 ## Important files in this repository
 - **data_collection**:
