@@ -26,7 +26,7 @@ class ModelWrapper:
                 model_dict = pickle.load(f)
                 self.model = [*model_dict.values()][0]
         elif choice == "nn":
-            self.model = load_model(Path("saved_models") / "NN_model")
+            self.model = load_model(str(Path("saved_models") / "NN_model"))
 
     def predict_proba(self, *args, **kwargs):
         if self.mtype == "rf":

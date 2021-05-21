@@ -58,7 +58,7 @@ The yoga pose detection is done in two big steps:
 * **Body pose detection** with MediaPipe;
 * **Pose classification** with machine learning or neural networks.
 
-To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts 
+To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts like _shoulder→elbow←hand_ or _shoulder→neck<-shoulder_.
 
 ## Important files in this repository
 - **data_collection**:

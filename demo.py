@@ -22,3 +22,5 @@ if __name__ == "__main__":
                 process_video(
                     str(filename.resolve()), fps=3, model_choice=model, show_video=True
                 )
+            else:
+                f"File {filename} does not exist."
