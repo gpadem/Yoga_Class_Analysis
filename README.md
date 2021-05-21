@@ -108,27 +108,11 @@ Exploration file that overlays a prerecorded video with bodypoints using the Med
 
 **webcam.py**
 Exploration file that overlays live webcam feed with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the live webcam feed with its probability.
-## images
 
-## saved models
-**saved_models/NN_model**
-**model.sav**
+## preprocessing.py
+This file contains all functions to load images and extracts the bodypoints using MediaPipe library returning them as XYZ coordinates. A function to calculate the 3D body angles to make the pose independent from a coordinate system and label them.
 
-## Usage scripts
-**README.md**
-**requirements.txt**
-
-## Usage scripts
-**README.md**
-**requirements.txt**
-
-### preprocessing.py
-This contains all functions used to extract datapoints and calculate the body angles from images.
-
-### full_data.csv
-A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset. 
-
-### Model training
+## Model training
 
 ![Image of models](images/models.png)
 
