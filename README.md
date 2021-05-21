@@ -58,6 +58,10 @@ The yoga pose detection is done in two big steps:
 
 To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts, like *shoulder → elbow ← wrist*.
 
+Also a dataframe with to probability distirubtion at each point in time is returned and can then be used to do some **workout analysis**, like pose repetition/duration etc.
+
+![Timeline of a 2 minute video section, classified with the NN model.](images/timeline_nn.png)
+
 ## Important files in this repository
 - **data_collection**:
     - [Data_extraction.ipynb](data_collection/Data_extraction.ipynb): How to extract bodypoints from images
