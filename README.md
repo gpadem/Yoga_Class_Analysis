@@ -57,6 +57,10 @@ The resulting pose prediction is then saved for each time interval and can be us
 
 ![Example workout of 2 minutes, analyized with the NN classifier.](images/timeline_nn.png)
 
+Also a dataframe with to probability distirubtion at each point in time is returned and can then be used to do some **workout analysis**, like pose repetition/duration etc.
+
+![Timeline of a 2 minute video section, classified with the NN model.](images/timeline_nn.png)
+
 ## Important files in this repository
 - **data_collection**:
     - [Data_extraction.ipynb](data_collection/Data_extraction.ipynb): How to extract bodypoints from images
