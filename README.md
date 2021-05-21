@@ -94,6 +94,8 @@ A .csv file containing the XYZ coordinates and labels of the performed yoga move
 
 ### Model training
 
+![Image of models](images/models.png)
+
 ### Machine Learning
 ### model.py
 In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
