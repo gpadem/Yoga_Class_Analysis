@@ -92,7 +92,7 @@ To go from the body part positions to person and camera-independant representati
 
 
 ## data_collection
-**Data_extraction.ipynb**
+**Data_extraction.ipynb**<pr>
 In these jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
 **Extra Data.ipynb**
