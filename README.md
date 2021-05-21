@@ -4,7 +4,7 @@ In this project, we use computer vision to classify yoga poses from video. We us
 
 ## Table of contents
 
- ## About this project
+## About this project
 This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
 
 **Repository:** Yoga_Class_Analysis
@@ -60,7 +60,7 @@ The main part is the function `process_video()` in _video_processing.py_, which 
 
 ## Workflow
 
-![Image of workflow](workflow.png)
+![Image of workflow](images/workflow.png)
 
 ## Important files in this repository
 - **Exploration**:
@@ -121,8 +121,6 @@ With this file a live video can be analyzed based on the two created models. Dis
 
 ### Extra
 
-#### timeline.png
-This .png file represents the probabilities of all the different yoga moves during a 1 minute video.
 
 #### README.md
 A file to explain the files, approach, etc. of this project.

@@ -190,7 +190,7 @@ if __name__ == "__main__":
         filename = Path(filename)
         outname = filename.stem
 
-    model = argv[2] if len(argv) >= 2 else "rf"
+    model = argv[2] if len(argv) >= 3 else "rf"
     print(f"{filename}, {outname}, {model}")
 
     video = process_video(
