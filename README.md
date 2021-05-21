@@ -121,7 +121,7 @@ This file contains all functions to load images and extracts the bodypoints usin
 ![Image of models](images/models.png)
 
 ### Machine Learning
-**model.py**: 
+**RandomForest_model.py**: 
 In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. First the training data is split into a training, testing and validation set. After the training of the model, a confusion matrix, classification report and accurracy score are generated for the training-test set and the training-validation set. After this the model is saved to model.sav.
 
 ### Neural Network
