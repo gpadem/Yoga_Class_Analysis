@@ -91,11 +91,34 @@ To go from the body part positions to person and camera-independant representati
 
 
 
-### Data_extraction.ipynb
-In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
+### data_collection
+**Data_extraction.ipynb**
+In these jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
-### Extra Data.ipynb
+**Extra Data.ipynb**
 To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
+
+### dataset
+**full_data.csv**
+A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset.
+
+## exploration
+**video.py**
+main file to predict poses from video stream.
+
+**webcam.py**
+With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
+
+## images
+
+## saved models
+**saved_models/NN_model**
+**model.sav**
+
+## Usage scripts
+**README.md**
+**requirements.txt**
+
 
 ### preprocessing.py
 This contains all functions used to extract datapoints and calculate the body angles from images.
