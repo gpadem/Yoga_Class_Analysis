@@ -63,24 +63,32 @@ The main part is the function `process_video()` in _video_processing.py_, which 
 ![Image of workflow](images/workflow.png)
 
 ## Important files in this repository
-- **Exploration**:
-    - [Data_extraction.ipynb](Data_extraction.ipynb): How 
-    - [Extra_Data.ipynb](Extra_Data.ipynb): How 
-    - Extra Data.ipynb: collection of extra training data
-    - [NN_classifier.ipynb](NN_classifier.ipynb)
-    - [video](NN_classifier.ipynb)
-    - webcam.py: test with webcam capturing
+- **data_collection**:
+    - [Data_extraction.ipynb](data_collection/Data_extraction.ipynb): How to extract bodypoints from images
+    - [Extra_Data.ipynb](data_collection/Extra_Data.ipynb): Scraping extra data and extracting the bodypoints
 
-    - video.py
+- **dataset**:
+    - [full_data.csv](dataset/full_data.csv): file containing all the body angles and labels
+
+- **exploration**:
+    - [video.py](exploration/video.py): How to use detection on video files
+    - [webcam.py](exploration/webcam.py): How to use detection on live webcam feed
+
+- **images**: folder containing images that are used in the README.md
+
+- **saved_models**:
+    - [NN_model](saved_models/NN_model): A folder containing the saved Neural Network
+    - [model.sav](saved_models/model.sav): A file containing the saved machine learning model
+    
 - Usage scripts 
-    - preprocessing.py
-    - video_processing.py
-- Training data
-    - full_data.csv
-- Trained models
-    - NN_model (folder)
-    - model.sav
-    - model.py
+    - [README.md](README.md)
+    - [requirements.txt](requirements.txt)
+- Preprocessing
+    - [preprocessing.py](preprocessing.py): A file containing the preprocesssing of images
+- Model training:
+    - [NN_classifier.ipynb](NN_classifier.ipynb): Training and saving the NN model
+    - [RandomForest_model.py](RandomForest_model.py): Training and saving the machine learning model
+
 
 ### Data_extraction.ipynb
 In this jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
