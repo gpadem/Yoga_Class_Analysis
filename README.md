@@ -90,24 +90,25 @@ To go from the body part positions to person and camera-independant representati
 
 
 ## data_collection
-**Data_extraction.ipynb**<pr>
+**Data_extraction.ipynb**: 
 In these jupyter notebook landmarks can be extracted (f.e.: nose, right_heel, left_hip, etc.) from given images of yoga poses from within the dataset. The XYZ coordinates and label of the yoga move are then stored in output.csv.
 
-**Extra Data.ipynb**
+**Extra Data.ipynb**: 
 To extend the trainingset for the models, extra images containing other people performing the yoga move, different camera angles had to be added. In this jupyter notebook extra images of the yoga poses can be automaticly downloaded. After this download, the images have to be checked for correctness by hand to ensure the right yoga move is performed within these pictures. Then the landmarks are extracted and added combined with output.csv into a new .csv file called full_data.csv.
 
 ## dataset
-**full_data.csv**
+**full_data.csv**: 
 A .csv file containing the XYZ coordinates and labels of the performed yoga moves on the images in the dataset.
 
 ## exploration
-**video.py**
+**video.py**: 
 Exploration file that overlays a prerecorded video with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the video with its probability.
 
-**webcam.py**
+**webcam.py**: 
 Exploration file that overlays live webcam feed with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the live webcam feed with its probability.
 
-## preprocessing.py
+## Preprocessing
+**preprocessing.py**: 
 This file contains all functions to load images and extracts the bodypoints using MediaPipe library returning them as XYZ coordinates. A function to calculate the 3D body angles to make the pose independent from a coordinate system and label them.
 
 ## Model training
@@ -115,38 +116,16 @@ This file contains all functions to load images and extracts the bodypoints usin
 ![Image of models](images/models.png)
 
 ### Machine Learning
-### model.py
+**model.py**: 
 In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
 
-### model.sav
-A file containing the trained machine learning model.
-
 ### Neural Network
-### NN_classifier.ipynb
+**NN_classifier.ipynb**: 
 This notebook contains the training and saving of the Feedforwad Neural Network.
 
-### NN_model
-This folder contains the saved Neural Network model and its variables.
-
-### Testing the model
-
-#### video_processing.py
-With this file a video can be analyzed based on the two created models. Displaying the move with the highest probability.
-
-#### video.py
-main file to predict poses from video stream.
-
-#### webcam.py
-With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
-
-### Extra
-
-
-#### README.md
-A file to explain the files, approach, etc. of this project.
-
-
-
+## Demo
+**demo.py**: 
+An interactive file that will predict the yoga moves displayed on a videofile or live webcam feed, depending on the model you select.
 
 ## Pending things to do
 
