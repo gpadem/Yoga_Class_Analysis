@@ -1,19 +1,21 @@
 # Yoga class analysis
 
-In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe](https://mediapipe.dev/) for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
-
-
-| ![](images/downward_wiki.jpg) | ![](images/dog_nn.jpg) |
-|:-:|:-:|
-| Downward-facing dog *(source: Wikipedia)* | Analysis with MediaPipe and our forward-facing model | 
-
-To run a simple **demo** on a video file or with your webcam, run `python demo.py` – provided that you have the needed [prerequisites](requirements.txt) installed. 
-
+In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe]() for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
 
 ## About this project
 This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
-The project was completed in 1.5 weeks.
 
+**Repository:** Yoga_Class_Analysis
+
+**Type of Challenge:** Learning
+
+**Duration:** 1 week
+
+**Deadline:** 21/05/2021
+
+**Deployment strategy:** Github page
+
+**Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
 ### Mission objectives
 
@@ -56,7 +58,7 @@ The yoga pose detection is done in two big steps:
 * **Body pose detection** with MediaPipe;
 * **Pose classification** with machine learning or neural networks.
 
-To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts, like *shoulder → elbow ← wrist*.
+To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts 
 
 Also a dataframe with to probability distirubtion at each point in time is returned and can then be used to do some **workout analysis**, like pose repetition/duration etc.
 
@@ -121,11 +123,11 @@ This file contains all functions to load images and extracts the bodypoints usin
 
 ### Machine Learning
 **model.py**: 
-In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
+In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. First the training data is split into a training, testing and validation set. After the training of the model, a confusion matrix, classification report and accurracy score are generated for the training-test set and the training-validation set. After this the model is saved to model.sav.
 
 ### Neural Network
 **NN_classifier.ipynb**: 
-This notebook contains the training and saving of the Feedforwad Neural Network.
+This notebook contains the training and saving of the Feedforwad Neural Network to label the 12 different yoga moves. First the training data is split into a training, testing and validation set. After the training of the model, a confusion matrix, classification report and accurracy score are generated for the training-test set and the training-validation set. After this the model is saved to the folder NN_model.
 
 ## Demo
 **demo.py**: 
