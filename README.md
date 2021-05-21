@@ -109,7 +109,8 @@ Exploration file that overlays a prerecorded video with bodypoints using the Med
 **webcam.py**
 Exploration file that overlays live webcam feed with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the live webcam feed with its probability.
 
-## preprocessing.py
+## Preprocessing
+**preprocessing.py**
 This file contains all functions to load images and extracts the bodypoints using MediaPipe library returning them as XYZ coordinates. A function to calculate the 3D body angles to make the pose independent from a coordinate system and label them.
 
 ## Model training
@@ -117,38 +118,16 @@ This file contains all functions to load images and extracts the bodypoints usin
 ![Image of models](images/models.png)
 
 ### Machine Learning
-### model.py
+**model.py**
 In this file a multiclass classifier (random forest) is trained and evalutated to label the 12 different yoga moves. 
 
-### model.sav
-A file containing the trained machine learning model.
-
 ### Neural Network
-### NN_classifier.ipynb
+**NN_classifier.ipynb**
 This notebook contains the training and saving of the Feedforwad Neural Network.
 
-### NN_model
-This folder contains the saved Neural Network model and its variables.
-
-### Testing the model
-
-#### video_processing.py
-With this file a video can be analyzed based on the two created models. Displaying the move with the highest probability.
-
-#### video.py
-main file to predict poses from video stream.
-
-#### webcam.py
-With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
-
-### Extra
-
-
-#### README.md
-A file to explain the files, approach, etc. of this project.
-
-
-
+## Demo
+**demo.py**
+An interactive file that will predict the yoga moves displayed on a videofile or live webcam feed, depending on the model you select.
 
 ## Pending things to do
 
