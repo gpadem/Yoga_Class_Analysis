@@ -1,21 +1,19 @@
 # Yoga class analysis
 
-In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe]() for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
+In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe](https://mediapipe.dev/) for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
+
+
+| ![](images/downward_wiki.jpg) | ![](images/dog_nn.jpg) |
+|:-:|:-:|
+| Downward-facing dog *(source: Wikipedia)* | Analysis with MediaPipe and our forward-facing model | 
+
+To run a simple **demo** on a video file or with your webcam, run `python demo.py` – provided that you have the needed [prerequisites](requirements.txt) installed. 
+
 
 ## About this project
 This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
+The project was completed in 1.5 weeks.
 
-**Repository:** Yoga_Class_Analysis
-
-**Type of Challenge:** Learning
-
-**Duration:** 1 week
-
-**Deadline:** 21/05/2021
-
-**Deployment strategy:** Github page
-
-**Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
 ### Mission objectives
 
@@ -58,7 +56,7 @@ The yoga pose detection is done in two big steps:
 * **Body pose detection** with MediaPipe;
 * **Pose classification** with machine learning or neural networks.
 
-To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts 
+To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts, like *shoulder → elbow ← wrist*.
 
 ## Important files in this repository
 - **data_collection**:
