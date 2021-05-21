@@ -65,8 +65,10 @@ The main part is the function `process_video()` in _video_processing.py_, which 
 ## Important files in this repository
 - **Exploration**:
     - [Data_extraction.ipynb](Data_extraction.ipynb): How 
+    - [Extra_Data.ipynb](Extra_Data.ipynb): How 
     - Extra Data.ipynb: collection of extra training data
     - [NN_classifier.ipynb](NN_classifier.ipynb)
+    - [video](NN_classifier.ipynb)
     - webcam.py: test with webcam capturing
 
     - video.py
