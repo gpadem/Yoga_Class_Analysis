@@ -1,13 +1,15 @@
 #  imports
-from pathlib import Path
 import pickle
+from pathlib import Path
 from sys import argv
-import numpy as np
+
 import cv2
+import numpy as np
 import pandas as pd
-from preprocessing import extract_features, load_image
-from mediapipe import solutions
 from keras.models import load_model
+from mediapipe import solutions
+
+from preprocessing import extract_features, load_image
 
 
 class ModelWrapper:
