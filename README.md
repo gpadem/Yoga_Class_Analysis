@@ -3,8 +3,19 @@
 In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe]() for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
 
 ## About this project
-This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion. 
-The challence duration was 1.5 weeks
+This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
+
+**Repository:** Yoga_Class_Analysis
+
+**Type of Challenge:** Learning
+
+**Duration:** 1 week
+
+**Deadline:** 21/05/2021
+
+**Deployment strategy:** Github page
+
+**Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
 ### Mission objectives
 
@@ -37,7 +48,7 @@ To *use* the processing pipeline, you run **video_processing.py**, however this 
 python video_processing.py VIDEOFILE [rf|nn]
 ```
 
-The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame. For all options, look in the docstrings of the Python files.
+The main part is the function `process_video()` in _video_processing.py_, which can be used to convert a video to an annoted one, and also returns a dataframe with probability distribution of all poses for each analyzed frame. For all options, look in the docstrings of the python files.
 
 ## Workflow
 
@@ -47,11 +58,7 @@ The yoga pose detection is done in two big steps:
 * **Body pose detection** with MediaPipe;
 * **Pose classification** with machine learning or neural networks.
 
-To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts like _shoulder→elbow←hand_ or _shoulder→neck<-shoulder_.
-
-The resulting pose prediction is then saved for each time interval and can be used to do **analysis** like pose repetition/duration, etc.
-
-![Example workout of 2 minutes, analyized with the NN classifier.](images/timeline_nn.png)
+To go from the body part positions to person and camera-independant representation, we calculate angles between imporant body parts 
 
 ## Important files in this repository
 - **data_collection**:
@@ -97,11 +104,10 @@ A .csv file containing the XYZ coordinates and labels of the performed yoga move
 
 ## exploration
 **video.py**
-main file to predict poses from video stream.
+Exploration file that overlays a prerecorded video with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the video with its probability.
 
 **webcam.py**
-With this file a live video can be analyzed based on the two created models. Displaying the move with the highest probability.
-
+Exploration file that overlays live webcam feed with bodypoints using the MediaPipe and opencv libraries. It predicts the yoga move based on the saved machine learning model (RandomForestClassifier). This predicted yoga move is then displayed on the live webcam feed with its probability.
 ## images
 
 ## saved models
@@ -112,6 +118,9 @@ With this file a live video can be analyzed based on the two created models. Dis
 **README.md**
 **requirements.txt**
 
+## Usage scripts
+**README.md**
+**requirements.txt**
 
 ### preprocessing.py
 This contains all functions used to extract datapoints and calculate the body angles from images.
