@@ -1,23 +1,14 @@
 # Yoga class analysis
 
-In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe]() for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
+In this project, we use computer vision to classify yoga poses from video. We use [MediaPipe](https://mediapipe.dev/) for the pose detection, and then machine learning or a neural network to classify the resulting data points to a small selection of yoga poses.
 
-## Table of contents
+To quickly try an **interactive demo** (provided that you have the necessary [requirements](requirements.txt)), run 
+```python 
+python demo.py
+```
 
 ## About this project
 This project outcome belongs to **Bram De Vroey**, **Joren Vervoort** and **Gülce Padem** who are currently junior Data Scientists/AI Operators in making at BeCode's _Theano 2.27_ promotion.
-
-**Repository:** Yoga_Class_Analysis
-
-**Type of Challenge:** Learning
-
-**Duration:** 1 week
-
-**Deadline:** 21/05/2021
-
-**Deployment strategy:** Github page
-
-**Contributers:** Gülce Padem, Bram De Vroey & Joren Vervoort
 
 ### Mission objectives
 

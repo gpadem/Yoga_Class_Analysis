@@ -13,14 +13,20 @@ from preprocessing import extract_features, load_image
 
 
 class ModelWrapper:
+    """Wrapping class to make select either our Random FOrest model or our NN model.
+
+    It ensures that method calls like .predict are similar between models.
+    """
+
     def __init__(self, choice="rf"):
+        """Select which model to load: "rf" for random forest, "nn" for neural network."""
         self.mtype = choice
         if choice == "rf":
-            with open("model.sav", "rb") as f:
+            with open("saved_models/model.sav", "rb") as f:
                 model_dict = pickle.load(f)
                 self.model = [*model_dict.values()][0]
         elif choice == "nn":
-            self.model = load_model("NN_model")
+            self.model = load_model("saved_models/NN_model")
 
     def predict_proba(self, *args, **kwargs):
         if self.mtype == "rf":
